@@ -4,7 +4,7 @@ import TreeView from "@material-ui/lab/TreeView";
 import TreeItem from "@material-ui/lab/TreeItem";
 
 import React from "react";
-import { increment, addChild } from "./actions/index";
+import { increment, addChild, removeChild } from "./actions/index";
 const mapStateToProps = (state) => {
   console.log("mapStateToProps", state);
   console.log("mapStateToProps1", state);
@@ -23,8 +23,11 @@ const mapDispatchToProps = (dispatch) => {
       //console.log("zxc", id, counter);
       dispatch(increment(id));
     },
-    addChild: (id) => {
-      dispatch(addChild(id));
+    addChild: (id, parentId) => {
+      dispatch(addChild(id, parentId));
+    },
+    removeChild: (id, parentId) => {
+      dispatch(removeChild(id, parentId));
     }
   };
 };
@@ -42,9 +45,16 @@ const App = (props) => {
       counter: counter
     });
   };
-  const addChild = (id) => {
+  const addChild = (id, parentId) => {
     props.addChild({
-      id: id
+      id: id,
+      parentId: parentId
+    });
+  };
+  const removeChild = (id, parentId) => {
+    props.removeChild({
+      id: id,
+      parentId: parentId
     });
   };
   //const dispatch = useDispatch();
@@ -71,13 +81,19 @@ const App = (props) => {
               +
             </button>
 
-            <a href="#" style={{ color: "black", textDecoration: "none" }}>
+            <a
+              href="#"
+              style={{ color: "black", textDecoration: "none" }}
+              onClick={() => {
+                removeChild(nodes.id, nodes.parent);
+              }}
+            >
               ×
             </a>
             <a
               href="#"
               onClick={() => {
-                addChild(nodes.id);
+                addChild(nodes.id, nodes.parent);
               }}
             >
               Add child

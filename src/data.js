@@ -2,7 +2,11 @@ let data = {
   id: "0",
   name: "Counter",
   counter: 0,
-  children: [
+  children: [],
+  parentId: -1
+};
+export default data;
+/* children: [
     {
       id: "1",
       name: "Counter",
@@ -47,6 +51,4 @@ let data = {
         }
       ]
     }
-  ]
-};
-export default data;
+  ]*/
