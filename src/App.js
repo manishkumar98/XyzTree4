@@ -6,10 +6,10 @@ import TreeItem from "@material-ui/lab/TreeItem";
 import React from "react";
 import { increment, addChild, removeChild } from "./actions/index";
 const mapStateToProps = (state) => {
-  console.log("mapStateToProps", state);
-  console.log("mapStateToProps1", state);
+  //console.log("mapStateToProps", state);
+  //console.log("mapStateToProps1", state);
   //console.log("mapStateToProps2",.nodes);
-  console.log("ddssw", state);
+  //console.log("ddssw", state);
   return {
     data: state
     //nodes:state.nodes
@@ -23,8 +23,8 @@ const mapDispatchToProps = (dispatch) => {
       //console.log("zxc", id, counter);
       dispatch(increment(id));
     },
-    addChild: (id, parentId) => {
-      dispatch(addChild(id, parentId));
+    addChild: (id /*, parentId*/) => {
+      dispatch(addChild(id /* parentId*/));
     },
     removeChild: (id, parentId) => {
       dispatch(removeChild(id, parentId));
@@ -37,18 +37,18 @@ const App = (props) => {
 
   const increment = (id, counter) => {
     // e.preventDefault();
-    console.log("yq", id);
-    console.log("counter", counter);
+    //console.log("yq", id);
+    //console.log("counter", counter);
     //working fime
     props.increment({
       id: id,
       counter: counter
     });
   };
-  const addChild = (id, parentId) => {
+  const addChild = (id /*, parentId*/) => {
     props.addChild({
-      id: id,
-      parentId: parentId
+      id: id
+      /*parentId: parentId*/
     });
   };
   const removeChild = (id, parentId) => {
@@ -85,7 +85,7 @@ const App = (props) => {
               href="#"
               style={{ color: "black", textDecoration: "none" }}
               onClick={() => {
-                removeChild(nodes.id, nodes.parent);
+                removeChild(nodes.id, nodes.parentId);
               }}
             >
               ×
@@ -93,7 +93,7 @@ const App = (props) => {
             <a
               href="#"
               onClick={() => {
-                addChild(nodes.id, nodes.parent);
+                addChild(nodes.id /*, nodes.parent*/);
               }}
             >
               Add child
@@ -107,7 +107,7 @@ const App = (props) => {
           : null}
       </TreeItem>
     );
-  console.log("heythere", props.data);
+  //console.log("heythere", props.data);
   return (
     <div className="App">
       <h1>Creating a static tree</h1>

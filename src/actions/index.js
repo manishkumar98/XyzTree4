@@ -4,8 +4,8 @@ export const increment = (id, counter) => ({
 });
 export const addChild = (id, parentId) => ({
   type: "ADD_CHILD",
-  id,
-  parentId
+  id /*,
+  parentId*/
 });
 export const removeChild = (id, parentId) => ({
   type: "REMOVE_CHILD",

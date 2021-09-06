@@ -1,9 +1,9 @@
 let data = {
   id: "0",
+  parentId: "-1",
   name: "Counter",
   counter: 0,
-  children: [],
-  parentId: -1
+  children: []
 };
 export default data;
 /* children: [
