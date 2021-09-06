@@ -218,11 +218,13 @@ function reducers(state = data, action) {
             stack1.push(nodey.children[u]);
           }
         }
+        var children1;
         if (f === 1 && nodey.children) {
-          nodey.children = nodey.children.forEach(function (o) {
+          children1 = nodey.children.forEach(function (o) {
             o.children = o.children.filter((id) => id.id !== action.id.id);
           });
         }
+        nodey.children = children1;
       }
       // if (nodex.id === action.id.parentId) {
       //console.log("alpha&",nodex.id);
@@ -263,6 +265,7 @@ function reducers(state = data, action) {
       //stack.push(nodex.children[i]);
       // }
     }
+
     console.log(nodey);
     return state1;
   }
