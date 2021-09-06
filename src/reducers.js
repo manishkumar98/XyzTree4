@@ -109,7 +109,7 @@ function reducers(state = data, action) {
     while (stack.length > 0) {
       nodex = stack.pop();
       //console.log("stack1", nodex);
-      if (nodex.id === action.id.id) {
+      if (nodex && nodex.id === action.id.id) {
         nodex.children.push({
           id: "2" + Math.abs(Math.random() * 100),
           name: "Counter",
@@ -188,24 +188,24 @@ function reducers(state = data, action) {
     }
     let data1=data.reduce(flatten,[]);
     console.log(data1);*/
-    let stack = [];
+    let stack1 = [];
     //let state1 = { ...state };
     let state1 = { ...state };
     //console.log(state === state1);
-    stack.push(state1);
+    stack1.push(state1);
     //console.log("de", state1);
     //console.log("stack", stack.length);
     console.log(state1);
-    while (stack.length > 0) {
-      var nodey = stack.pop();
+    while (stack1.length > 0) {
+      var nodey = stack1.pop();
       console.log("stack1", nodey);
-      len = 0;
+      var len1 = 0;
 
       if (nodey.children) {
-        len = nodey.children.length;
-        console.log("len", len, nodey.children);
+        len1 = nodey.children.length;
+        console.log("len1", len1, nodey.children);
         var f = 0;
-        for (var u = 0; u < len; u++) {
+        for (var u = 0; u < len1; u++) {
           console.log("asd", nodey.children[u].id + " " + action.id.id);
           if (nodey.children[u].id === action.id.id) {
             f = 1;
@@ -215,14 +215,14 @@ function reducers(state = data, action) {
             nodey.children[u].children &&
             nodey.children[u].children.length > 0
           ) {
-            stack.push(nodey.children[u]);
+            stack1.push(nodey.children[u]);
           }
         }
-        f === 1 &&
-          nodey.children &&
-          nodey.children.forEach(function (o) {
+        if (f === 1 && nodey.children) {
+          nodey.children = nodey.children.forEach(function (o) {
             o.children = o.children.filter((id) => id.id !== action.id.id);
           });
+        }
       }
       // if (nodex.id === action.id.parentId) {
       //console.log("alpha&",nodex.id);
